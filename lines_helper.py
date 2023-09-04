@@ -5,14 +5,16 @@ import constants
 def display_lines(image, lines):
     line_image = np.zeros_like(image)
     for x1, y1, x2, y2 in lines:
-        cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
-
+        try:
+            cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
+        except:
+            "error displaying hough transform lines"
     return line_image
 
 def make_coordinates(image, line_parameters):
     slope, intercept = line_parameters
     y1 = image.shape[0]
-    y2 = int(y1*constants.ROAD_IMAGE_RATIO)
+    y2 = int(y1*(1-constants.ROAD_IMAGE_RATIO))
     x1 = int((y1 - intercept)/slope)
     x2 = int((y2 - intercept)/slope)
     return np.array([x1, y1, x2, y2])
@@ -34,9 +36,12 @@ def average_slope_intercept(image, lines):
         if not foundExistingLaneLine:
             lane_lines.append([(slope, intercept)])
 
+    lane_line_averages = []
     lane_line_coords = []
     for line in lane_lines:
         line_average = np.average(line, axis=0)
+        lane_line_averages.append(line_average)
         line_coords = make_coordinates(image, line_average)
         lane_line_coords.append(line_coords)
-    return np.array(lane_line_coords)
+
+    return np.array(lane_line_coords), np.array(lane_line_averages)
