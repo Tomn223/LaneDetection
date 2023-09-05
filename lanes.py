@@ -41,7 +41,7 @@ lane_line_img = cv2.addWeighted(lane_img, constants.BG_IMG_OPACITY, avg_line_img
 
 car_classifier = cv2.CascadeClassifier("cars.xml")
 
-car_boxes = car_classifier.detectMultiScale(lane_img)
+car_boxes = car_classifier.detectMultiScale(blur_img)
 
 cars_and_lanes_img = lane_line_img
 # print(avg_lines_params)
