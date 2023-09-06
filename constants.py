@@ -1,4 +1,4 @@
-IMAGE_NUM = 5 # which image to read from images folder 
+IMAGE_NUM = 3 # which image to read from images folder 
 CANNY_LOW_THRESHOLD = 50 # lower threshold for canny edge detection (deriv is lower than, throw away)
 CANNY_HIGH_THRESHOLD = 150 # upper threshold for canny edge detection (deriv is hgiher than, keep)
 ROAD_IMAGE_RATIO = 0.5 # road/lane lines generally in bottom half of image

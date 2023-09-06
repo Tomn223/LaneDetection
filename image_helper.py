@@ -1,11 +1,16 @@
 import cv2
 import numpy as np
 import constants
+import os
 
 def showAndDestroy(image):
     cv2.imshow("img", image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+def saveImageToFolder(image_name, image, dir):
+    path = os.path.join(os.getcwd(), f'{dir}/{image_name}.jpg')
+    cv2.imwrite(path, image)
 
 # return mask for only getting bottom ROAD_IMAGE_RATIO of image
 def region_of_interest(image):
